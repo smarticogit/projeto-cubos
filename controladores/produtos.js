@@ -78,6 +78,9 @@ const cadastrarProduto = async (req, res) => {
 
         return res.status(200).json(produto);
     } catch (error) {
+        if (error.message === "jwt expired") {
+            return res.status(400).json('Token Expirado');
+        }
         return res.status(400).json(error.message);
     }
 }
@@ -91,12 +94,12 @@ const atualizarProduto = async (req, res) => {
         return res.status(404).json('Informe ao menos um campo para atualizaçao do produto');
     }
     const body = {
-        ...(nome ? {nome} : {}),
-        ...(estoque ? {quantidade: estoque} : {}),
-        ...(preco ? {preco} : {}),
-        ...(categoria ? {categoria} : {}),
-        ...(descricao ? {descricao} : {}),
-        ...(imagem ? {imagem} : {})
+        ...(nome ? { nome } : {}),
+        ...(estoque ? { quantidade: estoque } : {}),
+        ...(preco ? { preco } : {}),
+        ...(categoria ? { categoria } : {}),
+        ...(descricao ? { descricao } : {}),
+        ...(imagem ? { imagem } : {})
     }
 
     try {
