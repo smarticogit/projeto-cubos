@@ -1,2 +1,0 @@
-# projeto-cubos
-Primeiro Deploy
